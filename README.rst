@@ -1,3 +1,10 @@
+Branch Notes
+============
+This Branch gives you the ability to deploy OpenStack with GlusterFS on a single Node, using the awesome scripts provided by beloglazov.
+You can still expand your Cloud with additional Nodes later on.
+Furthermore the Code is updated to work with CentOS 6.4 and the latest OpenStack Grizzly Release.
+
+
 A Step-by-Step Guide to Deploying OpenStack on CentOS Using the KVM Hypervisor and GlusterFS Distributed File System
 ====================================================================================================================
 
