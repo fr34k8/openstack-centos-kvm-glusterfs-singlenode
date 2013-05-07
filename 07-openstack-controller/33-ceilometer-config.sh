@@ -22,3 +22,7 @@ openstack-config --set /etc/ceilometer/ceilometer.conf DEFAULT metering_secret `
 openstack-config --set /etc/ceilometer/ceilometer.conf DEFAULT os_tenant_name $NOVA_SERVICE_TENANT
 openstack-config --set /etc/ceilometer/ceilometer.conf DEFAULT os_username $CEILOMETER_SERVICE_USERNAME
 openstack-config --set /etc/ceilometer/ceilometer.conf DEFAULT os_password $CEILOMETER_SERVICE_PASSWORD
+
+# Configure other Services to send Data to ceilometer
+
+openstack-config --set /etc/glance/glance-api.conf DEFAULT notifier_strategy qpid
