@@ -19,7 +19,7 @@
 yum install -y PyYAML
 
 # Clone a repository with Keystone initialization scripts
-git clone https://github.com/nimbis/keystone-init.git
+git clone https://github.com/jman883/keystone-init.git
 
 # Replace the default configuration with the values defined be the
 # environmental variables in configrc
@@ -32,6 +32,10 @@ sed -i "s/name:     glance/name:     $GLANCE_SERVICE_USERNAME/g" keystone-init/c
 sed -i "s/password: glance/password: $GLANCE_SERVICE_PASSWORD/g" keystone-init/config.yaml
 sed -i "s/name:     nova/name:     $NOVA_SERVICE_USERNAME/g" keystone-init/config.yaml
 sed -i "s/password: nova/password: $NOVA_SERVICE_PASSWORD/g" keystone-init/config.yaml
+sed -i "s/name:     cinder/name:     $CINDER_SERVICE_USERNAME/g" keystone-init/config.yaml
+sed -i "s/password: cinderpass/password: $CINDER_SERVICE_PASSWORD/g" keystone-init/config.yaml
+sed -i "s/name:     ceilometer/name:     $CEILOMETER_SERVICE_USERNAME/g" keystone-init/config.yaml
+sed -i "s/password: ceilometer/password: $CEILOMETER_SERVICE_PASSWORD/g" keystone-init/config.yaml
 sed -i "s/RegionOne/$OS_REGION_NAME/g" keystone-init/config.yaml
 
 # Run the Keystone initialization script
