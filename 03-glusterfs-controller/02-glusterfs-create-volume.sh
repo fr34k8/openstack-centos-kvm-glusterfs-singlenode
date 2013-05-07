@@ -16,7 +16,10 @@
 
 
 # Create a gluster volume replicated over 4 gluster hosts
-gluster volume create vm-instances replica 4 compute1:/export/gluster compute2:/export/gluster compute3:/export/gluster compute4:/export/gluster
+#gluster volume create vm-instances replica 4 compute1:/export/gluster compute2:/export/gluster compute3:/export/gluster compute4:/export/gluster
+
+# Create gluster volume on single node Setup - Can be extended later
+gluster volume create vm-instances compute1:/export/gluster
 
 # Start the created volume
 gluster volume start vm-instances
