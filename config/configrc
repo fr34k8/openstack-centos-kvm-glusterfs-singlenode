@@ -1,4 +1,3 @@
-# Copyright 2012 Anton Beloglazov
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,7 +12,7 @@
 # limitations under the License.
 
 # MySQL root password
-export MYSQL_ROOT_PASSWORD=mysqlrootpassword
+export MYSQL_ROOT_PASSWORD="rootmysqlpassword"
 
 # The OpenStack admin user account
 export OS_USERNAME=admin
@@ -22,29 +21,39 @@ export OS_TENANT_NAME=admin
 export OS_REGION_NAME=RegionOne
 
 # Keystone settings
-export KEYSTONE_MYSQL_PASSWORD=keystonemysqlpassword
+export KEYSTONE_MYSQL_PASSWORD="keystonemysqlpassword"
 
 # Glance settings
-export GLANCE_MYSQL_PASSWORD=glancemysqlpassword
+export GLANCE_MYSQL_PASSWORD="glancemysqlpassword"
 export GLANCE_SERVICE_USERNAME=glance
-export GLANCE_SERVICE_PASSWORD=glancepassword
+export GLANCE_SERVICE_PASSWORD="glancepassword"
 
 # Nova settings
-export NOVA_MYSQL_PASSWORD=novamysqlpassword
+export NOVA_MYSQL_PASSWORD="novamysqlpassword"
 export NOVA_SERVICE_USERNAME=nova
-export NOVA_SERVICE_PASSWORD=novapassword
+export NOVA_SERVICE_PASSWORD="novapassword"
+
+# Cinder settings
+export CINDER_MYSQL_PASSWORD="cindermysqlpassword"
+export CINDER_SERVICE_USERNAME=cinder
+export CINDER_SERVICE_PASSWORD="cinderpassword"
+
+# Ceilomatic settings
+export CEILOMATIC_MYSQL_PASSWORD="ceilomaticmysqlpassword"
+export CEILOMATIC_SERVICE_USERNAME=ceilomatic
+export CEILOMATIC_SERVICE_PASSWORD="ceilomaticpassword"
 
 # Public IP address of the network gateway
-export PUBLIC_IP_ADDRESS=128.250.26.161
+export PUBLIC_IP_ADDRESS=0.0.0.0
 
 # IP address of the metadata host (in our setup the metadata service
 # is running on the controller)
-export METADATA_HOST=192.168.0.5
+export METADATA_HOST=192.0.0.1
 
 
 # Do NOT change the variables below
 
 export GLANCE_SERVICE_TENANT=service
 export NOVA_SERVICE_TENANT=service
-export NOVA_OS_AUTH_URL=http://controller:5000/
-export OS_AUTH_URL=http://controller:5000/v2.0/
+export NOVA_OS_AUTH_URL=http://localhost:5000/
+export OS_AUTH_URL=http://localhost:5000/v2.0/
