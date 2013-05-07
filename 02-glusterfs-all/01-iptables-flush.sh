@@ -15,9 +15,12 @@
 # limitations under the License.
 
 
-# Flush the iptables rules. For production it is recommended to open
-# the specific required ports.
-iptables -F
+# Open required Ports for GlusterFS
+# See http://gluster.org/community/documentation/index.php/Gluster_3.2:_Installing_GlusterFS_on_Red_Hat_Package_Manager_(RPM)_Distributions
+iptables -A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 24007:24047 -j ACCEPT 
+iptables -A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 111 -j ACCEPT 
+iptables -A RH-Firewall-1-INPUT -m state --state NEW -m udp -p udp --dport 111 -j ACCEPT 
+iptables -A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport 38465:38467 -j ACCEPT
 
 # Save the configuration and restart iptables
 service iptables save
