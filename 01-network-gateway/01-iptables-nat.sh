@@ -17,14 +17,14 @@
 
 # Flush the iptables rules. For production it is recommended to open
 # the specific required ports.
-iptables -F
-iptables -t nat -F
-iptables -t mangle -F
+# iptables -F
+# iptables -t nat -F
+# iptables -t mangle -F
 
 # Set up packet forwarding for NAT
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-iptables -A FORWARD -i eth1 -j ACCEPT
-iptables -A FORWARD -o eth1 -j ACCEPT
+iptables -A FORWARD -i br100 -j ACCEPT
+iptables -A FORWARD -o br100 -j ACCEPT
 
 # Save the iptables configuration into a file and restart iptables
 service iptables save
