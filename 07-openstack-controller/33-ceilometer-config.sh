@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-openssl rand -hex 10 > metering-secret
+openssl rand -hex 50 > metering-secret
 # Set Metering Secret for Ceilometer
 openstack-config --set /etc/ceilometer/ceilometer.conf DEFAULT metering_secret `cat metering-secret`
 
