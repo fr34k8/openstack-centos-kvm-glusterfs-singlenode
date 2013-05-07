@@ -1,2 +1,0 @@
-# Installs the Measurements and Monitoring Component "Ceilometer"
-yum install -y openstack-ceilometer*
