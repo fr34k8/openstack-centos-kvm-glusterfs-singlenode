@@ -18,5 +18,9 @@
 # Set the generated admin token in the Keystone configuration
 openstack-config --set /etc/keystone/keystone.conf DEFAULT admin_token `cat keystone-admin-token`
 
+# Set keystone to use User ID auth Method instead of the new PKI
+openstack-config --set /etc/keystone/keystone.conf signing token_format UUID
+openstack-config --set /etc/keystone/keystone.conf signing default_format UUID
+
 # Set the connection to the MySQL server
 openstack-config --set /etc/keystone/keystone.conf sql connection mysql://keystone:$KEYSTONE_MYSQL_PASSWORD@localhost/keystone
