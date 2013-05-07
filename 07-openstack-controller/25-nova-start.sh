@@ -25,12 +25,11 @@ service tgtd restart
 service openstack-nova-api restart
 service openstack-nova-cert restart
 service openstack-nova-consoleauth restart
-# The following has been removed in Folsom
-# Uncomment for older versions of OpenStack
-#service openstack-nova-direct-api restart
-service openstack-nova-metadata-api restart
+
+# Nova Metadata API must not run on single Node Installations as it blocks nova-compute from starting
+#service openstack-nova-metadata-api restart
+
 service openstack-nova-scheduler restart
-service openstack-nova-volume restart
 
 # Make the service start on the system startup
 chkconfig qpidd on
@@ -38,9 +37,6 @@ chkconfig tgtd on
 chkconfig openstack-nova-api on
 chkconfig openstack-nova-cert on
 chkconfig openstack-nova-consoleauth on
-# The following has been removed in Folsom
-# Uncomment for older versions of OpenStack
-#chkconfig openstack-nova-direct-api on
-chkconfig openstack-nova-metadata-api on
+# Nova Metadata API must not run on single Node Installations as it blocks nova-compute from starting
+#chkconfig openstack-nova-metadata-api on
 chkconfig openstack-nova-scheduler on
-chkconfig openstack-nova-volume on
