@@ -21,13 +21,13 @@
 openstack-config --set /etc/nova/nova.conf DEFAULT verbose True
 
 # Set the connection to the MySQL server
-openstack-config --set /etc/nova/nova.conf DEFAULT sql_connection mysql://nova:$NOVA_MYSQL_PASSWORD@controller/nova
+openstack-config --set /etc/nova/nova.conf DEFAULT sql_connection mysql://nova:$NOVA_MYSQL_PASSWORD@localhost/nova
 
 # Make Nova use Keystone as the identity management service
 openstack-config --set /etc/nova/nova.conf DEFAULT auth_strategy keystone
 
 # Set the host name of the Qpid AMQP message broker
-openstack-config --set /etc/nova/nova.conf DEFAULT qpid_hostname controller
+openstack-config --set /etc/nova/nova.conf DEFAULT qpid_hostname localhost
 
 # Set Nova user credentials
 openstack-config --set /etc/nova/api-paste.ini filter:authtoken admin_tenant_name $NOVA_SERVICE_TENANT
@@ -38,13 +38,13 @@ openstack-config --set /etc/nova/api-paste.ini filter:authtoken auth_uri $NOVA_O
 # Set the network configuration
 openstack-config --set /etc/nova/nova.conf DEFAULT network_host compute1
 openstack-config --set /etc/nova/nova.conf DEFAULT fixed_range 10.0.0.0/24
-openstack-config --set /etc/nova/nova.conf DEFAULT flat_interface eth1
+openstack-config --set /etc/nova/nova.conf DEFAULT flat_interface br100
 openstack-config --set /etc/nova/nova.conf DEFAULT flat_network_bridge br100
-openstack-config --set /etc/nova/nova.conf DEFAULT public_interface eth1
+openstack-config --set /etc/nova/nova.conf DEFAULT public_interface eth0
 openstack-config --set /etc/nova/nova.conf DEFAULT force_dhcp_release False
 
 # Set the Glance host name
-openstack-config --set /etc/nova/nova.conf DEFAULT glance_host controller
+openstack-config --set /etc/nova/nova.conf DEFAULT glance_host localhost
 
 # Set the VNC configuration
 openstack-config --set /etc/nova/nova.conf DEFAULT vncserver_listen 0.0.0.0
@@ -53,6 +53,9 @@ openstack-config --set /etc/nova/nova.conf DEFAULT vncserver_proxyclient_address
 openstack-config --set /etc/nova/nova.conf DEFAULT novncproxy_base_url http://$PUBLIC_IP_ADDRESS:6080/vnc_auto.html
 # This is the host accessible from outside, where xvpvncproxy is running on
 openstack-config --set /etc/nova/nova.conf DEFAULT xvpvncproxy_base_url http://$PUBLIC_IP_ADDRESS:6081/console
+
+# Set Nova to use cinder Volume Service
+openstack-config --set /etc/nova/nova.conf DEFAULT volume_api_class nova.volume.cinder.API
 
 # Set the host name of the metadata service
 openstack-config --set /etc/nova/nova.conf DEFAULT metadata_host $METADATA_HOST
