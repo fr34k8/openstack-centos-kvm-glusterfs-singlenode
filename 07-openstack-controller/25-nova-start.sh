@@ -21,6 +21,9 @@ service qpidd restart
 # iSCSI target daemon for nova-volume
 service tgtd restart
 
+# Restart libvirtd for mirtual machine management
+service libvirtd restart
+
 # Start OpenStack Nova services
 service openstack-nova-api restart
 service openstack-nova-cert restart
@@ -30,6 +33,9 @@ service openstack-nova-consoleauth restart
 #service openstack-nova-metadata-api restart
 
 service openstack-nova-scheduler restart
+service openstack-nova-conductor restart
+service openstack-nova-compute restart
+service openstack-nova-network restart
 
 # Make the service start on the system startup
 chkconfig qpidd on
@@ -40,3 +46,6 @@ chkconfig openstack-nova-consoleauth on
 # Nova Metadata API must not run on single Node Installations as it blocks nova-compute from starting
 #chkconfig openstack-nova-metadata-api on
 chkconfig openstack-nova-scheduler on
+chkconfig openstack-nova-conductor on
+chkconfig openstack-nova-compute on
+chkconfig openstack-nova-network on
