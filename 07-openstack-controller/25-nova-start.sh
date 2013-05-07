@@ -35,7 +35,6 @@ service openstack-nova-consoleauth restart
 service openstack-nova-scheduler restart
 service openstack-nova-conductor restart
 service openstack-nova-compute restart
-service openstack-nova-network restart
 
 # Make the service start on the system startup
 chkconfig qpidd on
@@ -48,4 +47,3 @@ chkconfig openstack-nova-consoleauth on
 chkconfig openstack-nova-scheduler on
 chkconfig openstack-nova-conductor on
 chkconfig openstack-nova-compute on
-chkconfig openstack-nova-network on
