@@ -39,9 +39,9 @@ export CINDER_SERVICE_USERNAME=cinder
 export CINDER_SERVICE_PASSWORD="cinderpassword"
 
 # Ceilomatic settings
-export CEILOMATIC_MYSQL_PASSWORD="ceilomaticmysqlpassword"
-export CEILOMATIC_SERVICE_USERNAME=ceilomatic
-export CEILOMATIC_SERVICE_PASSWORD="ceilomaticpassword"
+export CEILOMETER_MYSQL_PASSWORD="ceilomaticmysqlpassword"
+export CEILOMETER_SERVICE_USERNAME=ceilomatic
+export CEILOMETER_SERVICE_PASSWORD="ceilomaticpassword"
 
 # Public IP address of the network gateway
 export PUBLIC_IP_ADDRESS=0.0.0.0
