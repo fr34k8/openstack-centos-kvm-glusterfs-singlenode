@@ -18,9 +18,6 @@
 # Start the Qpid AMQP message broker
 service qpidd restart
 
-# iSCSI target daemon for nova-volume
-service tgtd restart
-
 # Restart libvirtd for mirtual machine management
 service libvirtd restart
 
@@ -38,7 +35,6 @@ service openstack-nova-compute restart
 
 # Make the service start on the system startup
 chkconfig qpidd on
-chkconfig tgtd on
 chkconfig openstack-nova-api on
 chkconfig openstack-nova-cert on
 chkconfig openstack-nova-consoleauth on
