@@ -14,6 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# MySQL Connection String
+openstack-config --set /etc/ceilometer/ceilometer.conf DEFAULT sql_connection mysql://ceilometer:$CEILOMETER_MYSQL_PASSWORD@localhost/ceilometer
+
 openssl rand -hex 50 > metering-secret
 # Set Metering Secret for Ceilometer
 openstack-config --set /etc/ceilometer/ceilometer.conf DEFAULT metering_secret `cat metering-secret`
