@@ -586,14 +586,20 @@ one network interface.
 Hard Drive Partitioning.
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-The hard drive partitioning scheme is the same for all the compute
-hosts, but differs for the controller. Table 2 shows the partitioning
-scheme for the compute hosts. ``vg_base`` is a volume group comprising
+Table 2 shows the partitioning scheme for the compute hosts. 
+``vg_base`` is a volume group comprising
 the standard OS partitions: ``lv_root``, ``lv_home`` and ``lv_swap``.
 ``vg_gluster`` is a special volume group containing a single
 ``lv_gluster`` partition, which is dedicated to serve as a GlusterFS
 brick. The ``lv_gluster`` logical volume is formatted using the
 XFS [25]_ file system, as recommended for GlusterFS bricks.
+The ``cinder-volumes`` volume group is used by OpenStack Cinder to allocated
+volumes for VM instances. This volume group is managed by Cinder;
+therefore, there is not need to create logical volumes manually. The
+``vg_images`` volume group and its ``lv_images`` logical volume are
+devoted for storing VM images by OpenStack Glance. The mount point for
+``lv_images`` is ``/var/lib/glance/images``, which is the default
+directory used by Glance to store VM image files.
 
 +------------------------+-------------+-----------------------+------------+
 | Device                 | Size (MB)   | Mount Point / Volume  | Type       |
@@ -607,6 +613,14 @@ XFS [25]_ file system, as recommended for GlusterFS bricks.
 |     lv\_swap           | 6000        |                       | swap       |
 +------------------------+-------------+-----------------------+------------+
 |     lv\_home           | 4996        | /home                 | ext4       |
++------------------------+-------------+-----------------------+------------+
+|   cinder-volumes       | 29996       |                       |            |
++------------------------+-------------+-----------------------+------------+
+|     Free               | 29996       |                       |            |
++------------------------+-------------+-----------------------+------------+
+|   vg\_images           | 28788       |                       |            |
++------------------------+-------------+-----------------------+------------+
+|     lv\_images         | 28788       | /var/lib/glance/images| ext4       |
 +------------------------+-------------+-----------------------+------------+
 |   vg\_gluster          | 216972      |                       |            |
 +------------------------+-------------+-----------------------+------------+
@@ -623,57 +637,8 @@ XFS [25]_ file system, as recommended for GlusterFS bricks.
 |     sda3               | 216974      | vg\_gluster           | PV (LVM)   |
 +------------------------+-------------+-----------------------+------------+
 
-Table: The partitioning scheme for the compute hosts
+Table 2: The partitioning scheme for the compute hosts
 
-Table 3 shows the partitioning scheme for the controller. It does not
-include a ``vg_gluster`` volume group since the controller is not going
-to be a part of the GlusterFS volume. However, the scheme includes two
-new important volume groups: ``nova-volumes`` and ``vg_images``. The
-``nova-volumes`` volume group is used by OpenStack Nova to allocated
-volumes for VM instances. This volume group is managed by Nova;
-therefore, there is not need to create logical volumes manually. The
-``vg_images`` volume group and its ``lv_images`` logical volume are
-devoted for storing VM images by OpenStack Glance. The mount point for
-``lv_images`` is ``/var/lib/glance/images``, which is the default
-directory used by Glance to store VM image files.
-
-+----------------------+-------------+------------------------+------------+
-| Device               | Size (MB)   | Mount Point / Volume   | Type       |
-+======================+=============+========================+============+
-| *LVM Volume Groups*  |             |                        |            |
-+----------------------+-------------+------------------------+------------+
-|   nova-volumes       | 29996       |                        |            |
-+----------------------+-------------+------------------------+------------+
-|     Free             | 29996       |                        |            |
-+----------------------+-------------+------------------------+------------+
-|   vg\_base           | 16996       |                        |            |
-+----------------------+-------------+------------------------+------------+
-|     lv\_root         | 10000       | /                      | ext4       |
-+----------------------+-------------+------------------------+------------+
-|     lv\_swap         | 2000        |                        | swap       |
-+----------------------+-------------+------------------------+------------+
-|     lv\_home         | 4996        | /home                  | ext4       |
-+----------------------+-------------+------------------------+------------+
-|   vg\_images         | 28788       |                        |            |
-+----------------------+-------------+------------------------+------------+
-|     lv\_images       | 28788       | /var/lib/glance/images | ext4       |
-+----------------------+-------------+------------------------+------------+
-| *Hard Drives*        |             |                        |            |
-+----------------------+-------------+------------------------+------------+
-|   sda                |             |                        |            |
-+----------------------+-------------+------------------------+------------+
-|     sda1             | 500         | /boot                  | ext4       |
-+----------------------+-------------+------------------------+------------+
-|     sda2             | 17000       | vg\_base               | PV (LVM)   |
-+----------------------+-------------+------------------------+------------+
-|     sda3             | 30000       | nova-volumes           | PV (LVM)   |
-+----------------------+-------------+------------------------+------------+
-|     sda4             | 28792       |                        | Extended   |
-+----------------------+-------------+------------------------+------------+
-|       sda5           | 28788       | vg\_images             | PV (LVM)   |
-+----------------------+-------------+------------------------+------------+
-
-Table: The partitioning scheme for the controller
 
 Network Gateway
 ~~~~~~~~~~~~~~~
