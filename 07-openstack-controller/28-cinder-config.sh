@@ -42,6 +42,6 @@ echo '        filter = [ "a/.*/" ] '
 echo ' and replace it with this Line, but change the devices to your config and the output of lsblk !!!! '
 echo '        filter = [ "a/md1/", "a/md2/", "a/md3/", "a/md4/", "a/md5/", "r/.*/" ] '
 echo ' In this example we need md1, md2, md3, md4 and md5. md6 contains the cinder-volume!'
-echo ' The list HAS to END with --> "r/.*/" <-- !
+echo ' The list HAS to END with --> "r/.*/" <-- ! '
 echo ' After you are done. Continue with the scripts'
 echo ' --------------------------------------------------------------------------------------'
