@@ -586,6 +586,8 @@ one network interface.
 Hard Drive Partitioning.
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
+*Note: This Table was altered for the single node setup guide and does not match anymore with the described disk setup above. Just don't worry and adjust the sizes to your available hardware!*
+
 Table 2 shows the partitioning scheme for the compute hosts. 
 ``vg_base`` is a volume group comprising
 the standard OS partitions: ``lv_root``, ``lv_home`` and ``lv_swap``.
@@ -606,9 +608,9 @@ directory used by Glance to store VM image files.
 +========================+=============+=======================+============+
 | *LVM Volume Groups*    |             |                       |            |
 +------------------------+-------------+-----------------------+------------+
-|   vg\_base             | 20996       |                       |            |
+|   vg\_base             | 30996       |                       |            |
 +------------------------+-------------+-----------------------+------------+
-|     lv\_root           | 10000       | /                     | ext4       |
+|     lv\_root           | 20000       | /                     | ext4       |
 +------------------------+-------------+-----------------------+------------+
 |     lv\_swap           | 6000        |                       | swap       |
 +------------------------+-------------+-----------------------+------------+
@@ -618,9 +620,9 @@ directory used by Glance to store VM image files.
 +------------------------+-------------+-----------------------+------------+
 |     Free               | 29996       |                       |            |
 +------------------------+-------------+-----------------------+------------+
-|   vg\_images           | 28788       |                       |            |
+|   vg\_images           | 29996       |                       |            |
 +------------------------+-------------+-----------------------+------------+
-|     lv\_images         | 28788       | /var/lib/glance/images| ext4       |
+|     lv\_images         | 29996       | /var/lib/glance/images| ext4       |
 +------------------------+-------------+-----------------------+------------+
 |   vg\_gluster          | 216972      |                       |            |
 +------------------------+-------------+-----------------------+------------+
@@ -632,12 +634,16 @@ directory used by Glance to store VM image files.
 +------------------------+-------------+-----------------------+------------+
 |     sda1               | 500         | /boot                 | ext4       |
 +------------------------+-------------+-----------------------+------------+
-|     sda2               | 21000       | vg\_base              | PV (LVM)   |
+|     sda2               | 31000       | vg\_base              | PV (LVM)   |
 +------------------------+-------------+-----------------------+------------+
-|     sda3               | 216974      | vg\_gluster           | PV (LVM)   |
+|     sda3               | 30000       | cinder-volumes        | PV (LVM)   |
++------------------------+-------------+-----------------------+------------+
+|     sda4               | 30000       | vg\_images            | PV (LVM)   |
++------------------------+-------------+-----------------------+------------+
+|     sda5               | Remaining   | vg\_gluster           | PV (LVM)   |
 +------------------------+-------------+-----------------------+------------+
 
-Table 2: The partitioning scheme for the compute hosts
+Table 2: The partitioning scheme for the Single Node Setup
 
 
 Network Gateway
